@@ -30,11 +30,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 py-10">
+    <footer className="bg-white border-t border-yellow-200 py-10">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-          <span className="text-xl font-bold">
-            Alex<span className="text-violet-400">.</span>
+          <span className="text-xl font-bold text-gray-900">
+            Alex<span className="text-yellow-500">.</span>
           </span>
           <p className="text-gray-500 text-sm mt-1">Full-Stack Developer &amp; UI Designer</p>
         </div>
@@ -45,14 +45,14 @@ export default function Footer() {
               key={social.label}
               href={social.href}
               aria-label={social.label}
-              className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
+              className="w-10 h-10 rounded-full bg-yellow-100 hover:bg-yellow-200 border border-yellow-200 flex items-center justify-center text-yellow-700 hover:text-yellow-900 transition-all duration-200"
             >
               {social.icon}
             </a>
           ))}
         </div>
 
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-400 text-sm">
           &copy; {new Date().getFullYear()} Alex Johnson. All rights reserved.
         </p>
       </div>

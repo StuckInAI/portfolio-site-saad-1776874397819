@@ -24,12 +24,12 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gray-950/90 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'
+        scrolled ? 'bg-yellow-50/90 backdrop-blur-md shadow-lg shadow-yellow-200/40' : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-xl font-bold text-white tracking-tight">
-          Alex<span className="text-violet-400">.</span>
+        <a href="#" className="text-xl font-bold text-gray-900 tracking-tight">
+          Alex<span className="text-yellow-500">.</span>
         </a>
 
         {/* Desktop nav */}
@@ -38,7 +38,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-gray-400 hover:text-white text-sm font-medium transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -47,7 +47,7 @@ export default function Navbar() {
           <li>
             <a
               href="#contact"
-              className="bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors duration-200"
+              className="bg-yellow-400 hover:bg-yellow-300 text-yellow-900 text-sm font-medium px-4 py-2 rounded-full transition-colors duration-200"
             >
               Hire Me
             </a>
@@ -56,7 +56,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-gray-400 hover:text-white"
+          className="md:hidden text-gray-600 hover:text-gray-900"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -72,13 +72,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800">
+        <div className="md:hidden bg-yellow-50/95 backdrop-blur-md border-t border-yellow-200">
           <ul className="flex flex-col px-6 py-4 gap-4">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-gray-300 hover:text-white font-medium transition-colors"
+                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}
