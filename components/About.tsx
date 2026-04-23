@@ -1,9 +1,27 @@
-export default function About() {
+import { Profile } from '@/lib/db';
+
+interface AboutProps {
+  profile: Profile | null;
+}
+
+export default function About({ profile }: AboutProps) {
+  const name = profile?.name ?? 'Your Name';
+  const title = profile?.title ?? 'Full-Stack Developer';
+  const bio = profile?.bio ?? '';
+  const bioSecondary = profile?.bio_secondary ?? '';
+
+  const initials = name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
   const stats = [
-    { value: '5+', label: 'Years Experience' },
-    { value: '40+', label: 'Projects Completed' },
-    { value: '20+', label: 'Happy Clients' },
-    { value: '3', label: 'Awards Won' },
+    { value: profile?.years_experience ?? '—', label: 'Years Experience' },
+    { value: profile?.projects_completed ?? '—', label: 'Projects Completed' },
+    { value: profile?.happy_clients ?? '—', label: 'Happy Clients' },
+    { value: profile?.awards ?? '—', label: 'Awards Won' },
   ];
 
   return (
@@ -15,10 +33,10 @@ export default function About() {
             <div className="w-full aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-yellow-100 to-amber-100 border border-yellow-200 flex items-center justify-center">
               <div className="text-center">
                 <div className="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center text-5xl font-bold mx-auto mb-4 text-yellow-900">
-                  AJ
+                  {initials}
                 </div>
-                <p className="text-gray-500 text-sm">Alex Johnson</p>
-                <p className="text-yellow-600 text-sm font-medium">Full-Stack Developer</p>
+                <p className="text-gray-500 text-sm">{name}</p>
+                <p className="text-yellow-600 text-sm font-medium">{title}</p>
               </div>
             </div>
             {/* Decorative elements */}
@@ -32,14 +50,12 @@ export default function About() {
             <h2 className="text-4xl font-bold mt-3 mb-6 text-gray-900">
               Passionate about building great products
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              I&apos;m a full-stack developer with over 5 years of experience building modern web applications.
-              I specialize in React, Next.js, and Node.js, and I&apos;m passionate about creating seamless user experiences.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-8">
-              When I&apos;m not coding, you can find me exploring new technologies, contributing to open-source projects,
-              or hiking in the mountains. I believe in writing clean, maintainable code and collaborating closely with clients.
-            </p>
+            {bio && (
+              <p className="text-gray-600 leading-relaxed mb-4">{bio}</p>
+            )}
+            {bioSecondary && (
+              <p className="text-gray-600 leading-relaxed mb-8">{bioSecondary}</p>
+            )}
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">

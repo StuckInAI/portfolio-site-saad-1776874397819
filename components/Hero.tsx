@@ -1,4 +1,19 @@
-export default function Hero() {
+import { Profile } from '@/lib/db';
+
+interface HeroProps {
+  profile: Profile | null;
+}
+
+export default function Hero({ profile }: HeroProps) {
+  const name = profile?.name ?? 'Your Name';
+  const title = profile?.title ?? 'Full-Stack Developer';
+  const initials = name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient */}
@@ -9,22 +24,24 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
         {/* Avatar */}
         <div className="w-28 h-28 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center text-4xl font-bold mb-8 shadow-2xl shadow-yellow-400/40 text-yellow-900">
-          AJ
+          {initials}
         </div>
 
-        <span className="inline-block bg-yellow-200/80 border border-yellow-400/50 text-yellow-800 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-          Available for work ✨
-        </span>
+        {profile?.available_for_work && (
+          <span className="inline-block bg-yellow-200/80 border border-yellow-400/50 text-yellow-800 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            Available for work ✨
+          </span>
+        )}
 
         <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-gray-900">
           Hi, I&apos;m{' '}
           <span className="bg-gradient-to-r from-yellow-500 to-amber-500 bg-clip-text text-transparent">
-            Alex Johnson
+            {name}
           </span>
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-10 font-light">
-          Full-Stack Developer &amp; UI Designer crafting beautiful, performant web experiences.
+          {title}
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center">

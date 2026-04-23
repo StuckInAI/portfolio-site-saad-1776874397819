@@ -1,8 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Profile } from '@/lib/db';
 
-export default function Navbar() {
+interface NavbarProps {
+  profile: Profile | null;
+}
+
+export default function Navbar({ profile }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,6 +26,8 @@ export default function Navbar() {
     { label: 'Contact', href: '#contact' },
   ];
 
+  const firstName = profile?.name?.split(' ')[0] ?? 'Portfolio';
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -29,7 +36,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="text-xl font-bold text-gray-900 tracking-tight">
-          Alex<span className="text-yellow-500">.</span>
+          {firstName}<span className="text-yellow-500">.</span>
         </a>
 
         {/* Desktop nav */}

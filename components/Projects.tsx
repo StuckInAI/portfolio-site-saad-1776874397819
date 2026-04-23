@@ -1,70 +1,10 @@
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  gradient: string;
-  emoji: string;
-  link: string;
+import { Project } from '@/lib/db';
+
+interface ProjectsProps {
+  projects: Project[];
 }
 
-export default function Projects() {
-  const projects: Project[] = [
-    {
-      title: 'E-Commerce Platform',
-      description:
-        'A full-stack e-commerce app built with Next.js, Stripe, and PostgreSQL. Features include product management, cart, and checkout.',
-      tags: ['Next.js', 'Stripe', 'PostgreSQL', 'Tailwind'],
-      gradient: 'from-yellow-100 to-amber-100',
-      emoji: '🛒',
-      link: '#',
-    },
-    {
-      title: 'Task Management App',
-      description:
-        'A Kanban-style task manager with drag-and-drop, real-time updates, and team collaboration features.',
-      tags: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
-      gradient: 'from-amber-100 to-orange-100',
-      emoji: '📋',
-      link: '#',
-    },
-    {
-      title: 'AI Content Generator',
-      description:
-        'An AI-powered writing assistant that helps create blog posts, social media content, and marketing copy.',
-      tags: ['Next.js', 'OpenAI', 'Prisma', 'TypeScript'],
-      gradient: 'from-yellow-50 to-yellow-100',
-      emoji: '🤖',
-      link: '#',
-    },
-    {
-      title: 'Finance Dashboard',
-      description:
-        'A comprehensive finance tracking app with beautiful charts, budgeting tools, and expense categorization.',
-      tags: ['React', 'Chart.js', 'Express', 'PostgreSQL'],
-      gradient: 'from-amber-100 to-yellow-100',
-      emoji: '📊',
-      link: '#',
-    },
-    {
-      title: 'Social Media App',
-      description:
-        'A modern social platform with real-time messaging, media sharing, and personalized content feeds.',
-      tags: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
-      gradient: 'from-orange-100 to-amber-100',
-      emoji: '💬',
-      link: '#',
-    },
-    {
-      title: 'Developer Portfolio',
-      description:
-        'A sleek, animated portfolio website for developers, featuring project showcases and contact forms.',
-      tags: ['Next.js', 'Framer Motion', 'Tailwind', 'TypeScript'],
-      gradient: 'from-yellow-100 to-orange-100',
-      emoji: '🌐',
-      link: '#',
-    },
-  ];
-
+export default function Projects({ projects }: ProjectsProps) {
   return (
     <section id="projects" className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6">
@@ -77,38 +17,43 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <div
-              key={project.title}
-              className={`bg-gradient-to-br ${project.gradient} border border-yellow-200 rounded-2xl p-6 flex flex-col hover:scale-[1.02] transition-transform duration-200 hover:shadow-xl hover:shadow-yellow-200/60`}
-            >
-              <div className="text-4xl mb-4">{project.emoji}</div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">{project.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-5">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="bg-yellow-200/70 text-yellow-900 text-xs font-medium px-3 py-1 rounded-full border border-yellow-300/50"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <a
-                href={project.link}
-                className="text-sm font-semibold text-yellow-600 hover:text-yellow-500 flex items-center gap-1 transition-colors"
+        {projects.length === 0 ? (
+          <p className="text-center text-gray-400">No projects found. Add some in your database!</p>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className={`bg-gradient-to-br ${
+                  project.gradient || 'from-yellow-100 to-amber-100'
+                } border border-yellow-200 rounded-2xl p-6 flex flex-col hover:scale-[1.02] transition-transform duration-200 hover:shadow-xl hover:shadow-yellow-200/60`}
               >
-                View Project
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div>
-          ))}
-        </div>
+                <div className="text-4xl mb-4">{project.emoji || '🚀'}</div>
+                <h3 className="text-lg font-bold mb-2 text-gray-900">{project.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {(project.tags ?? []).map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-yellow-200/70 text-yellow-900 text-xs font-medium px-3 py-1 rounded-full border border-yellow-300/50"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={project.link || '#'}
+                  className="text-sm font-semibold text-yellow-600 hover:text-yellow-500 flex items-center gap-1 transition-colors"
+                >
+                  View Project
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
